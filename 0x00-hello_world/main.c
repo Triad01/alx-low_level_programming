@@ -7,6 +7,6 @@
  */
 int main(void)
 {	
-	printf ("this isyour first hello world script");
+	printf("this isyour first hello world script");
 	return (0);
 }
