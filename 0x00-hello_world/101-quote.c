@@ -7,7 +7,6 @@
 */
 int main(void)
 {
-char *message = "and that piece of art is useful\" - Dora Korpar, 2015-10-19";
-write(STDERR_FILENO, message, 80);
+printf("and that piece of art is useful\" - Dora Korpar, 2015-10-19");
 return (1);
 }
