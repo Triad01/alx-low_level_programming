@@ -12,7 +12,6 @@ int main(void)
 	{
 		putchar(small_letters);
 	}
-		
 		putchar('\n');
 		return (0);
 }
