@@ -1,21 +1,18 @@
 #include <stdio.h>
 /**
-* main - prints letters to  stdout
-* Description: prints letters in letters in lowercase
-* Return: always 0 (successful)
+* main - to print letters to stdout
+* Description: prints letters in small case
+* Return: always return 0 (successfull)
 */
-
 int main(void)
 {
-	char letters[] = 'abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	int i;
+	char small_letter, big_letter;
 
-	for (i = 0; letters[i] != '\0'; i++)
+	for (small_letter = 'a'; small_letter <= 'z'; small_letter++)
+		putchar(small_letter);
+	for (big_letter = 'A'; big_letter <= 'Z'; big_letter++)
 	{
-		putchar(letters[i]);
+		putchar(big_letter);
 	}
-		putchar(0);
-		return (0);
-
+	return (0);
 }
-
