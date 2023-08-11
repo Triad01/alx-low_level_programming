@@ -7,14 +7,12 @@
 */
 int main(void)
 {
-	char small_letters, small_letters_no_o;
+	char small_letters;
 
-	small_letters_no_o = strstr(o, small_letters);
 	for (small_letters = 'a'; small_letters <= 'z'; small_letters++)
 	{
-		small_letters_no_e = strchr(e, small_letters);
-		small_letters_no_q = strchr(e, small_letters);
-		puthr(small_letters_no_e, small_letters_no_q)
+		if (small_letters != 'q' && small_letters != 'e')
+			putchar(small_letters);
 	}
 		putchar('\n');
 		return (0);
