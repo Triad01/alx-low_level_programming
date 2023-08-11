@@ -8,8 +8,9 @@
 int main(void)
 {
 	char letters[] = 'abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	int i;
 
-	for (int i = 0; letters[i] != '\0'; i++)
+	for (i = 0; letters[i] != '\0'; i++)
 	{
 		putchar(letters[i]);
 	}
