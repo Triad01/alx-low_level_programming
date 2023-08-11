@@ -7,14 +7,14 @@
 
 int main(void)
 {
-	char small_letters, big_letters;
+	char letters[] = 'abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-	for (small_letters = 'a'; small_letters <= 'z'; small_letters++)
-		putchar(small_letters);
-	for (big_letters = 'A'; big_letters <= 'Z'; big_letters++)
+	for (int i = 0; letters[i] != '\0'; i++)
 	{
-		putchar(big_letters);
+		putchar(letters[i]);
 	}
-	return (0);
+		putchar(0);
+		return (0);
+
 }
 
