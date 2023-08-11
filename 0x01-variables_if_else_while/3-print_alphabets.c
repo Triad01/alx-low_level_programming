@@ -6,13 +6,14 @@
 */
 int main(void)
 {
-	char small_letter, big_letter;
+	char small_letters, big_letters;
 
-	for (small_letter = 'a'; small_letter <= 'z'; small_letter++)
-		putchar(small_letter);
-	for (big_letter = 'A'; big_letter <= 'Z'; big_letter++)
+	for (small_letters = 'a'; small_letters <= 'z'; small_letters++)
+		putchar(small_letters);
+	for (big_letters = 'A'; big_letters <= 'Z'; big_letters++)
 	{
-		putchar(big_letter);
+		putchar(big_letters);
 	}
-	return (0);
+		putchar('\n');
+		return (0);
 }
