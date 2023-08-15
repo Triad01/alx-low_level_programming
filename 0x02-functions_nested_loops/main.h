@@ -1,5 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
-/* function declaration*/
+/* function declarations*/
 int _putchar(char c);
+void print_alphabet(void);
 #endif
