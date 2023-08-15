@@ -1,13 +1,17 @@
 #include "main.h"
 /**
-* main - prints alphabets
-* Description: prints lowercased alphabets
-* Return: always 0 (successful)
+* print_alphabet - prints alphabets
+* Description: displays letters to stdout
+* Return: always return void
 */
-void print_alphabet(void);
-int main(void)
+void print_alphabet(void)
 {
-	print_alphabet();
+	char letter = 'a';
+
+	while (letter <= 'z')
+	{
+		_putchar(letter);
+		letter++;
+	}
 	_putchar('\n');
-	return (0);
 }

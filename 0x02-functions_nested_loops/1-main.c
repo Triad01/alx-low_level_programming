@@ -1,15 +1,12 @@
 #include "main.h"
 /**
 * print_alphabet - prints letters
-* Description: display small letters
+* Description: display small letter
+* Return: always return 0 (successful)
 */
-void print_alphabet(void)
+int main(void)
 {
-        char letter = 'a';
-
-        while (letter <= 'z')
-        {
-                _putchar(letter);
-                letter++;
-        }
+	print_alphabet();
+	return (0);
 }
+
