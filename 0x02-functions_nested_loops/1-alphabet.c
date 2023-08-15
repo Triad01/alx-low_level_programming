@@ -11,17 +11,3 @@ int main(void)
 	_putchar('\n');
 	return (0);
 }
-/**
-* print_alphabet - prints letters
-* Description: display small letters
-*/
-void print_alphabet(void)
-{
-	char c = 'a';
-
-	while (c <= 'z')
-	{
-		_putchar(c);
-		c++;
-	}
-}

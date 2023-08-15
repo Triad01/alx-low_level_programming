@@ -1,8 +1,15 @@
 #include "main.h"
-#include <unistd.h>
 /**
-* print_alphabet - prints alphabets
-* Description: lowercased alphabets
-* Return: always void;
+* print_alphabet - prints letters
+* Description: display small letters
 */
-void print_alphabet(void);
+void print_alphabet(void)
+{
+        char letter = 'a';
+
+        while (letter <= 'z')
+        {
+                _putchar(letter);
+                letter++;
+        }
+}
