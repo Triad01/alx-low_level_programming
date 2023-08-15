@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "main.h"
 /**
 * main - prints test to stdout
 * Description: prints _putchar
@@ -6,6 +6,13 @@
 */
 int main(void)
 {
-	printf("_putchar\n");
+	int i;
+	char str[] = "_putchar";
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		_putchar(str[i]);
+	}
+	_putchar('\n');
 	return (0);
 }
