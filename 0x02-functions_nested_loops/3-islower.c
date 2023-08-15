@@ -1,6 +1,6 @@
 #include "main.h"
 /**
-* _isLower - prints 1 or 0
+* _islower - prints 1 or 0
 * @c: first operand
 *
 * Description: prints i for lower and 1 for lowercased letters
