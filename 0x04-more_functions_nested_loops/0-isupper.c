@@ -7,10 +7,10 @@
 
 int _isupper(int letter)
 {
-	while (letter >= 'a' && letter <= 'z')
+	if (letter >= 'A' && letter <= 'Z')
 	{
-		return (0);
-	}
 		return (1);
+	}
+		return (0);
 	return (0);
 }
