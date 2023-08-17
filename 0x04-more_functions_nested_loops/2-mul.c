@@ -8,7 +8,8 @@
 */
 int mul(int numb1, int numb2)
 {
-	_putchar('\n');
-	return (numb1 * numb2);
+	int result;	
+	result = numb1 * numb2;
+	return (result);
 
 }
