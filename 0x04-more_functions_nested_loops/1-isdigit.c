@@ -7,7 +7,7 @@
 */
 int _isdigit(int c)
 {
-	while ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'A'))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'A'))
 	{
 		return (0);
 	}
