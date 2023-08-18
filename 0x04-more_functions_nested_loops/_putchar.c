@@ -1,3 +1,4 @@
+#include "main.h"
 #include <unistd.h>
 /**
 * _putchar - defines the _putchar function
