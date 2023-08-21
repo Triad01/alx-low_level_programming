@@ -1,7 +1,7 @@
 #include "main.h"
 /**
 * puts2 - prints characters of a string
-* @str - string passed as an argument
+* @str: string passed as an argument
 * Return: always 0 (successful)
 */
 
