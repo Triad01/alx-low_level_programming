@@ -8,6 +8,7 @@ void print_number(int n)
 {
 
 	int i, divisor, numDigits, temp;
+
 	temp = n;
 	numDigits = 0;
 
