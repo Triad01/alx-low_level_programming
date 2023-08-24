@@ -9,16 +9,16 @@
 char *rot13(char *str)
 {
 	int i, j;
-	char alphabet[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char rot13_alphabet[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	char alphabt[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char rot13_alphabt[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		for (j = 0; alphabet[j] != '\0'; j++)
+		for (j = 0; alphabt[j] != '\0'; j++)
 		{
-			if (str[i] == alphabet[j])
+			if (str[i] == alphabt[j])
 			{
-				str[i] = rot13_alphabet[j];
+				str[i] = rot13_alphabt[j];
 				break;
 			}
 		}
