@@ -4,6 +4,7 @@
 * @dest: first argument
 * @src: second argument
 * @n: third argument
+* Return: always 0
 */
 char *_memcpy(char *dest, char *src, unsigned int n)
 {
