@@ -3,7 +3,8 @@
 /**
 * main - entry into our program
 * @argc: number of command line arguments
-* @argc: array of command line arguments with size argc;
+* @argv: array of command line arguments with size argc;
+* Return: alaways 0 (successful)
 */
 int main(int argc, char *argv[])
 {
