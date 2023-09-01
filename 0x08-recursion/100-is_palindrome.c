@@ -37,4 +37,3 @@ int is_palindrome(char *s)
 
 	return (is_palindrome_recursive(s, 0, length - 1));
 }
-
