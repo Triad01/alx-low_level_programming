@@ -10,12 +10,12 @@ char *_strdup(char *str)
 	int i;
 	char *ptr;
 
-	ptr = (char *) malloc(*str * sizeof(char));
+	ptr = (char *) malloc(sizeof(char));
 
 	if (ptr == NULL)
 		return (NULL);
 	if (str == NULL)
-		return ("failed to allocate memory\n");
+		return (NULL);
 	for (i = 0; str[i] != '\0'; i++)
 		ptr[i] = str[i];
 	return (ptr);
