@@ -2,7 +2,7 @@
 #include <stdlib.h>
 /**
 * free_dog - frees allocated memory
-* @d: pointer 
+* @d: pointer
 */
 void free_dog(dog_t *d)
 {
