@@ -2,9 +2,9 @@
 /**
 * print_name - prints name to stdout
 * @name: name to be printed
-* @f: function to print name
+* @f: function pointer
 */
 void print_name(char *name, void (*f)(char *))
 {
-	f(name);
+	(*f)(name);
 }
