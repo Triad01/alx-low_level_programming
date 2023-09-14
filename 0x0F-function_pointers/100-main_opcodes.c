@@ -1,7 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+/**
+* print_opcodes - opcodes
+* @start: starting point
+* @num_bytes: number of bytes
+*/
+void print_opcodes(unsigned char *start, size_t num_bytes)
+{
+	size_t i;
 
+	for (i = 0; i < num_bytes; i++)
+	{
+		printf("%02x ", start[i]);
+	}
+	printf("\n");
+}
+/**
+* main - entry to program
+* @argc: argument count
+* @argv: argument vector
+* Return:always 0
+*/
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
@@ -12,34 +31,15 @@ int main(int argc, char *argv[])
 
 	int num_bytes = atoi(argv[1]);
 
-	if (num_bytes < 0)
+	if (num_bytes <= 0)
 	{
 		printf("Error\n");
 		return (2);
 	}
 
-	char command[100];
-	snprintf(command, sizeof(command), "objdump -d -j.text -M intel %s | grep '<main>:' | cut -d ':' -f 2- | cut -c 2-", argv[0]);
+	unsigned char *main_start = (unsigned char *)main;
 
-	FILE *pipe = popen(command, "r");
-	if (pipe == NULL)
-	{
-		perror("Error");
-		return (3);
-	}
-
-	char opcode[3];
-	while (fread(opcode, sizeof(char), 2, pipe) == 2 && num_bytes > 0)
-	{
-		printf("%s", opcode);
-		num_bytes -= 2;
-		if (num_bytes > 0)
-			printf(" ");
-	}
-
-	printf("\n");
-	pclose(pipe);
+	print_opcodes(main_start, num_bytes);
 
 	return (0);
 }
-
