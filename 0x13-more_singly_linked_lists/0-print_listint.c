@@ -8,18 +8,13 @@
 */
 size_t print_listint(const listint_t *h)
 {
-	int node_count = 0;
-	const listint_t *traverse_ptr;
+	size_t node_count = 0;
 
-	if (h == NULL)
-		return (1);
-	traverse_ptr = h;
-
-	while (traverse_ptr != NULL)
+	while (h != NULL)
 	{
-		printf("%d\n", traverse_ptr->n);
+		printf("%d\n", h->n);
 		node_count++;
-		traverse_ptr = traverse_ptr->next;
+		h = h->next;
 	}
 	return (node_count);
 }
