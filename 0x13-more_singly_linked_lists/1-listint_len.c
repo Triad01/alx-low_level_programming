@@ -10,7 +10,7 @@ size_t listint_len(const listint_t *h)
 	size_t node_count;
 
 	if (h == NULL)
-		return (0);
+		return (1);
 	traverse_ptr = h;
 	node_count = 0;
 
