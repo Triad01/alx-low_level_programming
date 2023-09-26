@@ -7,21 +7,21 @@
 */
 listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
-	listint_t *current_node_ptr;
-	unsigned int count;
+	listint_t *traverse_ptr;
+	unsigned int node_count;
 
-	count = 0;
+	node_count = 0;
 
-	current_node_ptr = head;
+	traverse_ptr = head;
 
-	while (current_node_ptr != NULL)
+	while (traverse_ptr != NULL)
 	{
-		if (count == index)
+		if (node_count == index)
 		{
-			return (current_node_ptr);
+			return (traverse_ptr);
 		}
-		current_node_ptr = current_node_ptr->next;
-		count++;
+		traverse_ptr = traverse_ptr->next;
+		node_count++;
 	}
 	return (NULL);
 }
