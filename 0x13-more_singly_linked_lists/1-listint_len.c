@@ -7,7 +7,7 @@
 size_t listint_len(const listint_t *h)
 {
 	const listint_t *traverse_ptr;
-	int node_count;
+	size_t node_count;
 
 	if (h == NULL)
 		return (1);
