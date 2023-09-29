@@ -1,10 +1,26 @@
+#include <stddef.h>
 #include "main.h"
 /**
 * binary_to_unit - converts binary to unsigned int
 * @b: pointer to string of 0 and 1 characters
-* Return: unsigned integer 
+* Return: unsigned integer
 */
 unsigned int binary_to_unit(const char *b)
 {
-			
+	unsigned int my_result;
+	int counter = 0;
+
+	my_result = 0;
+
+	if (b == NULL)
+		return (0);
+	while (b[counter] != '\0')
+	{
+		if (b[counter] != '0' && b[counter] != '1')
+			return (0);
+
+		my_result = my_result * 2 + (b[counter] - '0');
+		counter++;
+	}
+	return (my_result);
 }
