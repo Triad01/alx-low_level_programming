@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * print_binary - prints binary number to sdtout
- * @n: the number to print out
+ * @n: the number to be printed out
  */
 void print_binary(unsigned long int n)
 {
