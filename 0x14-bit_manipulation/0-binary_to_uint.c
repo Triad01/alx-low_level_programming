@@ -1,11 +1,11 @@
-#include <stddef.h>
 #include "main.h"
+#include <stddef.h>
 /**
-* binary_to_unit - converts binary to unsigned int
+* binary_to_uint - converts binary to unsigned int
 * @b: pointer to string of 0 and 1 characters
 * Return: unsigned integer
 */
-unsigned int binary_to_unit(const char *b)
+unsigned int binary_to_uint(const char *b)
 {
 	unsigned int my_result;
 	int counter = 0;
