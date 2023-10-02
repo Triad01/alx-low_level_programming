@@ -1,99 +1,87 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
-#include <elf.h>
+#include <unistd.h>
 
-/**
- * print_elf_header - Prints the information contained in the ELF header
- * @elf_header: Pointer to the ELF header structure
- */
-void print_elf_header(Elf64_Ehdr *elf_header)
-{
-	int i;
+#define BUF_SIZE 64
 
-	printf("ELF Header:\n");
-	printf("  Magic:   ");
-	for (i = 0; i < EI_NIDENT; i++)
-	{
-		printf("%02x ", elf_header->e_ident[i]);
-	}
-	printf("\n");
-	printf("  Class:                             %s\n", (elf_header->e_ident[EI_CLASS] == ELFCLASS64) ? "ELF64" : "ELF32");
-	printf("  Data:                              %s\n", (elf_header->e_ident[EI_DATA] == ELFDATA2LSB) ? "2's complement, little endian" : "2's complement, big endian");
-	printf("  Version:                           %d (current)\n", elf_header->e_ident[EI_VERSION]);
-	printf("  OS/ABI:                            %s\n", (elf_header->e_ident[EI_OSABI] == ELFOSABI_SYSV) ? "UNIX - System V" : "Unknown");
-	printf("  ABI Version:                       %d\n", elf_header->e_ident[EI_ABIVERSION]);
-	printf("  Type:                              ");
-	switch (elf_header->e_type)
-	{
-		case ET_NONE:
-			printf("NONE (Unknown)");
-			break;
-		case ET_REL:
-			printf("REL (Relocatable file)");
-			break;
-		case ET_EXEC:
-			printf("EXEC (Executable file)");
-			break;
-		case ET_DYN:
-			printf("DYN (Shared object file)");
-			break;
-		case ET_CORE:
-			printf("CORE (Core file)");
-			break;
-		default:
-			printf("Unknown");
-			break;
-	}
-	printf("\n");
-	printf("  Entry point address:               0x%lx\n", (unsigned long)elf_header->e_entry);
-}
+void print_elf_header(const unsigned char *header);
 
-/**
- * main - Displays the information contained in the ELF header of an ELF file
- * @argc: Number of command-line arguments
- * @argv: Array of command-line arguments
- * Return: 0 on success, exit with status code 98 on failure
- */
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	int fd;
-	Elf64_Ehdr elf_header;
+	unsigned char header[BUF_SIZE];
+	ssize_t;= bytes_read;
 
-	if (argc != 2)
-	{
+	if (argc != 2) {
 		dprintf(2, "Usage: %s elf_filename\n", argv[0]);
-		return (98);
+		exit(98);
 	}
 
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
+	if (fd == -1) {
 		dprintf(2, "Error: Can't open file %s\n", argv[1]);
-		return (98);
+		exit(98);
 	}
 
-	if (read(fd, &elf_header, sizeof(Elf64_Ehdr)) != sizeof(Elf64_Ehdr))
-	{
+	bytes_read = read(fd, header, BUF_SIZE);
+	if (bytes_read == -1) {
 		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
 		close(fd);
-		return (98);
+		exit(98);
 	}
 
-	if (elf_header.e_ident[EI_MAG0] != ELFMAG0 ||
-			elf_header.e_ident[EI_MAG1] != ELFMAG1 ||
-			elf_header.e_ident[EI_MAG2] != ELFMAG2 ||
-			elf_header.e_ident[EI_MAG3] != ELFMAG3)
-	{
-		dprintf(2, "Error: Not an ELF file: %s\n", argv[1]);
+	if (bytes_read < BUF_SIZE) {
+		dprintf(2, "Error: Not a valid ELF file: %s\n", argv[1]);
 		close(fd);
-		return (98);
+		exit(98);
 	}
 
-	print_elf_header(&elf_header);
+	if (header[0] != 0x7f || header[1] != 'E' || header[2] != 'L' || header[3] != 'F') {
+		dprintf(2, "Error: Not a valid ELF file: %s\n", argv[1]);
+		close(fd);
+		exit(98);
+	}
+
+	print_elf_header(header);
 
 	close(fd);
 	return (0);
+}
+
+void print_elf_header(const unsigned char *header) {
+	printf("ELF Header:\n");
+	printf("  Magic:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+			header[0], header[1], header[2], header[3], header[4], header[5], header[6], header[7],
+			header[8], header[9], header[10], header[11], header[12], header[13], header[14], header[15]);
+	printf("  Class:                             ELF%d\n", header[4] == 1 ? 32 : 64);
+	printf("  Data:                              2's complement, %s endian\n", header[5] == 1 ? "little" : "big");
+	printf("  Version:                           %d (current)\n", header[6]);
+	printf("  OS/ABI:                            ");
+	switch (header[7]) {
+		case 0: printf("UNIX - System V\n"); break;
+		case 1: printf("HP-UX\n"); break;
+		case 2: printf("NetBSD\n"); break;
+		case 3: printf("Linux\n"); break;
+		case 6: printf("Sun Solaris\n"); break;
+		default: printf("<unknown: %d>\n", header[7]); break;
+	}
+	printf("  ABI Version:                       %d\n", header[8]);
+	printf("  Type:                              ");
+	switch (*((unsigned short *)(header + 16))) {
+		case 0: printf("NONE (Unknown)\n"); break;
+		case 1: printf("REL (Relocatable file)\n"); break;
+		case 2: printf("EXEC (Executable file)\n"); break;
+		case 3: printf("DYN (Shared object file)\n"); break;
+		case 4: printf("CORE (Core file)\n"); break;
+		default: printf("<unknown: %d>\n", *((unsigned short *)(header + 16))); break;
+	}
+	printf("  Entry point address:               0x");
+	for (int i = 0; i < 8; i++) {
+		printf("%02x", header[24 + i]);
+	}
+	printf("\n");
 }
 
