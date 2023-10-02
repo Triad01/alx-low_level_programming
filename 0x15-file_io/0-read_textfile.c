@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include "main.h"
 /**
 * read_textfile - reads the text of another file
 * @filename: the file whose content is to be read
@@ -9,8 +11,8 @@
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	FILE *file_pointer = NULL;
-	size_t letters_read;
-	int read_result;
+	char buffer[1024];
+	ssize_t letters_read, bytes_read, bytes_written, bytes_to_write;
 
 	letters_read = 0;
 
@@ -20,22 +22,32 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 		exit(1);
 	}
-	while (letters_read < letters)
+	while (letters > 0)
 	{
-		read_result = fgetc(file_pointer);
-		if (read_result == EOF)
+		bytes_read = fread(buffer, 1, sizeof(buffer), file_pointer);
+		if (bytes_read <= 0)
 		{
-			if (ferror(file_pointer))
+			if (feof(file_pointer))
+				break;
+			else if (ferror(file_pointer))
 			{
 				fclose(file_pointer);
 				return (0);
 			}
-			break;
 		}
-		putchar(read_result);
-		letters_read++;
+		if ((ssize_t)letters < bytes_read)
+			bytes_to_write = (ssize_t)letters;
+		else
+			bytes_to_write = (ssize_t)bytes_read;
+		 bytes_written = write(STDOUT_FILENO, buffer, bytes_to_write);
+		if (bytes_written != bytes_to_write)
+		{
+			fclose(file_pointer);
+			return (0);
+		}
+		letters_read += bytes_written;
+		letters -= bytes_written;
 	}
 	fclose(file_pointer);
-	return (letters);
+	return (letters_read);
 }
-
