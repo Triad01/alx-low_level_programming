@@ -9,7 +9,6 @@
 int create_file(const char *filename, char *text_content)
 {
 	FILE *file_pointer = NULL;
-	int i;
 
 	file_pointer = fopen(filename, "w");
 
@@ -17,12 +16,14 @@ int create_file(const char *filename, char *text_content)
 	{
 		return (-1);
 	}
-	if (text_content == NULL)
-		fprintf(file_pointer, "%c", ' ');
-	else
-		for (i = 0; text_content[i] != '\0'; i++)
-			fprintf(file_pointer, "%c", text_content[i]);
-
+	if (text_content != NULL)
+	{
+		if (fputs(text_content, file_pointer) == EOF)
+		{
+			fclose(file_pointer);
+			return (-1);
+		}
+	}
 	fclose(file_pointer);
 
 	return (1);
