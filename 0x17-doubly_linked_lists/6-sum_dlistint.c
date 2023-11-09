@@ -12,17 +12,14 @@ int sum_dlistint(dlistint_t *head)
 
 	sum = 0;
 
-	if (head == NULL)
-	{
-		return (0);
-	}
-
 	traverse_ptr = head;
 
-	while (traverse_ptr->next != NULL)
+	while (traverse_ptr != NULL)
 	{
+		sum += traverse_ptr->n;
+
 		traverse_ptr = traverse_ptr->next;
-		sum = sum + traverse_ptr->n;
+
 	}
 	return (sum);
 }
